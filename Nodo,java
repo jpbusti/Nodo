@@ -1,0 +1,14 @@
+public class Node{
+
+    private String name;
+    private String lastname;
+
+    public Node(String name, String lastname){
+        this.name = name;
+        this.lastname = lastname;
+    }
+    public static void main(String[] args){
+        Node node = new Node("joe", "Doe");
+        system.out.print(node);
+    }
+}
