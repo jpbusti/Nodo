@@ -1,20 +1,25 @@
-import Node
+from Node import Node
 class SinglyLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
-
-    def traverse(self):
-        current = self.head
-        while current:
-            print(current.data, end=" -> ")
-            current = current.next
-        print("None")
+        self._size = 0
 
     def prepend(self, data):
-        new_node = Node.Node(data)
+        new_node = Node(data)
         new_node.next = self.head
         self.head = new_node
+        self._size+=1
+
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
 
     def append_tail(self, data):
         node = Node(data)
@@ -53,6 +58,36 @@ class SinglyLinkedList:
             current = current.next
             index += 1
         return -1
+    
+    def __str__(self):
+        values = []
+        current = self.head
+        while current:
+            values.append(str(current.data))
+            current = current.next
+        return " -> ".join(values) + " -> None"
+    
+    def traverse(self):
+        current = self.head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+
+    def get(self, index):
+        return self._node_at(index).data
+
+    def set(self, index, data):
+        self._node_at(index).data = data
+
+    def _node_at(self, index):
+        if index < 0 or index >= self._size:
+            raise IndexError("índice fuera de rango")
+        cur = self.head
+        for _ in range(index):
+            cur = cur.next
+        return cur
+
     def insert(self, index, data):
         if index < 0 or index > self._size:
             raise IndexError("índice fuera de rango")
@@ -61,10 +96,11 @@ class SinglyLinkedList:
         if index == self._size:
             return self.append(data)
         prev = self._node_at(index - 1)
-        node = Node.Node(data, prev.next)
+        node = Node(data, prev.next)
         prev.next = node
         self._size += 1
-
+    
+        
 sll= SinglyLinkedList()
 sll.prepend(1)
 sll.prepend(1)
