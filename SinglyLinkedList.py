@@ -15,11 +15,13 @@ class SinglyLinkedList:
         new_node = Node(data)
         if not self.head:
             self.head = new_node
+            self._size += 1
             return
         current = self.head
         while current.next:
             current = current.next
         current.next = new_node
+        self._size += 1
 
     def append_tail(self, data):
         node = Node(data)
@@ -102,11 +104,10 @@ class SinglyLinkedList:
     
         
 sll= SinglyLinkedList()
-sll.prepend(1)
-sll.prepend(1)
-sll.prepend(2)
-sll.prepend(3)
-sll.prepend(5)
+sll.append(8)
+sll.append(1)
+sll.append(4)
+sll.append(0)
+sll.append(7)
 print(sll.traverse())
-
-sll.insert(2,8)
+print(sll.get(2))
